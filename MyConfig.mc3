@@ -450,12 +450,12 @@
          <value>clear</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Interrupt Module" name="preemptiveLow"/>
-         <value>enabled</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="WDT" registerAlias="WDTCON" settingAlias="ULPLVL" alias="Voltage on ULPOUT lesser than 0.5V"/>
          <value>1</value>
+      </entry>
+      <entry>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Interrupt Module" name="preemptiveLow"/>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="MSSP1" registerAlias="SSPCON1" settingAlias="SSPM" alias="FOSC/4"/>
@@ -4033,7 +4033,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.h</file>
-         <hash>d034758bea66768877fc5647807c2a06b29a5938b30ba60dddc2a0feaeac1007</hash>
+         <hash>bf9994365b76e0ca3eeb3eadc0baf530cf847ee9d23f68adef5058f7421eb177</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\spi1.h</file>

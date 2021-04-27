@@ -10,7 +10,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5 main.c
 [; ;main.c: 5: uint8_t readloadcell(unsigned long sense);
 [v _readloadcell `(uc ~T0 @X0 0 ef1`ul ]
-"6
+"51 C:\Program Files\Microchip\xc8\v2.30\pic\include\c99\stdlib.h
+[; ;C:\Program Files\Microchip\xc8\v2.30\pic\include\c99\stdlib.h: 51: int abs (int);
+[v _abs `(i ~T0 @X0 0 ef1`i ]
+"6 main.c
 [; ;main.c: 6: void writepot(uint8_t i);
 [v _writepot `(v ~T0 @X0 0 ef1`uc ]
 "9370 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-J_DFP/1.3.35/xc8\pic\include\proc\pic18f27j53.h
@@ -28,8 +31,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "9391
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-J_DFP/1.3.35/xc8\pic\include\proc\pic18f27j53.h: 9391: extern volatile LATBbits_t LATBbits __attribute__((address(0xF8A)));
 [v _LATBbits `VS440 ~T0 @X0 0 e@3978 ]
-"49 main.c
-[; ;main.c: 49:     SPI1_Open(SPI1_DEFAULT);
+"57 main.c
+[; ;main.c: 57:     SPI1_Open(SPI1_DEFAULT);
 [c E6583 0 .. ]
 [n E6583 . SPI1_DEFAULT  ]
 "64 ./mcc_generated_files/spi1.h
@@ -1042,212 +1045,256 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-J_DFP/1.3.35/xc8\pic\include\proc\pic18f27j53.h: 17907: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"14 main.c
-[; ;main.c: 14: void main(void)
+"16 main.c
+[; ;main.c: 16: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"15
-[; ;main.c: 15: {
+"17
+[; ;main.c: 17: {
 {
 [e :U _main ]
 [f ]
-"16
-[; ;main.c: 16:     uint8_t load = 0;
+"18
+[; ;main.c: 18:     uint8_t load = 0;
 [v _load `uc ~T0 @X0 1 a ]
 [e = _load -> -> 0 `i `uc ]
-"17
-[; ;main.c: 17:     uint8_t load2 = 0;
+"19
+[; ;main.c: 19:     uint8_t load2 = 0;
 [v _load2 `uc ~T0 @X0 1 a ]
 [e = _load2 -> -> 0 `i `uc ]
-"18
-[; ;main.c: 18:     uint8_t diff = 0;
+"20
+[; ;main.c: 20:     uint8_t diff = 0;
 [v _diff `uc ~T0 @X0 1 a ]
 [e = _diff -> -> 0 `i `uc ]
-"20
-[; ;main.c: 20:     SYSTEM_Initialize();
-[e ( _SYSTEM_Initialize ..  ]
 "22
-[; ;main.c: 22:     _delay((unsigned long)((2000)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"23
-[; ;main.c: 23:     load = readloadcell(3000);
-[e = _load ( _readloadcell (1 -> -> -> 3000 `i `l `ul ]
+[; ;main.c: 22:     SYSTEM_Initialize();
+[e ( _SYSTEM_Initialize ..  ]
 "24
-[; ;main.c: 24:     load2 = load;
-[e = _load2 _load ]
-"25
-[; ;main.c: 25:     _delay((unsigned long)((2000)*(8000000/4000.0)));
+[; ;main.c: 24:     _delay((unsigned long)((2000)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"25
+[; ;main.c: 25:     load = readloadcell(2000);
+[e = _load ( _readloadcell (1 -> -> -> 2000 `i `l `ul ]
+"26
+[; ;main.c: 26:     load2 = load;
+[e = _load2 _load ]
 "27
-[; ;main.c: 27:     while (1){
+[; ;main.c: 27:     _delay((unsigned long)((2000)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"29
+[; ;main.c: 29:     while (1){
 [e :U 856 ]
 {
-"29
-[; ;main.c: 29:         load = readloadcell(3000);
-[e = _load ( _readloadcell (1 -> -> -> 3000 `i `l `ul ]
-"34
-[; ;main.c: 34:             writepot(load);
+"31
+[; ;main.c: 31:         load = readloadcell(2000);
+[e = _load ( _readloadcell (1 -> -> -> 2000 `i `l `ul ]
+"33
+[; ;main.c: 33:         diff = abs(load - load2);
+[e = _diff -> ( _abs (1 - -> _load `i -> _load2 `i `uc ]
+"36
+[; ;main.c: 36:         if(diff < 100 && load >= load2){
+[e $ ! && < -> _diff `i -> 100 `i >= -> _load `i -> _load2 `i 858  ]
+{
+"37
+[; ;main.c: 37:         writepot(load);
 [e ( _writepot (1 _load ]
+"38
+[; ;main.c: 38:         load2 = load;
+[e = _load2 _load ]
+"39
+[; ;main.c: 39:         }
+}
+[e :U 858 ]
 "41
-[; ;main.c: 41: _delay((unsigned long)((50)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[; ;main.c: 41:         if(load <= load2){
+[e $ ! <= -> _load `i -> _load2 `i 859  ]
+{
+"42
+[; ;main.c: 42:         writepot(load);
+[e ( _writepot (1 _load ]
 "43
-[; ;main.c: 43: }
+[; ;main.c: 43:         load2 = load;
+[e = _load2 _load ]
+"44
+[; ;main.c: 44:         }
+}
+[e :U 859 ]
+"49
+[; ;main.c: 49: _delay((unsigned long)((50)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"51
+[; ;main.c: 51: }
 }
 [e :U 855 ]
 [e $U 856  ]
 [e :U 857 ]
-"44
-[; ;main.c: 44: }
+"52
+[; ;main.c: 52: }
 [e :UE 854 ]
 }
-"46
-[; ;main.c: 46: void writepot(uint8_t i){
+"54
+[; ;main.c: 54: void writepot(uint8_t level){
 [v _writepot `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _writepot ]
-[v _i `uc ~T0 @X0 1 r1 ]
+[v _level `uc ~T0 @X0 1 r1 ]
 [f ]
-"47
-[; ;main.c: 47:     LATBbits.LATB1 = 0;
-[e = . . _LATBbits 0 1 -> -> 0 `i `uc ]
-"48
-[; ;main.c: 48:     _delay((unsigned long)((5)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"49
-[; ;main.c: 49:     SPI1_Open(SPI1_DEFAULT);
-[e ( _SPI1_Open (1 . `E6583 0 ]
-"50
-[; ;main.c: 50:     SPI1_WriteByte(0x00);
-[e ( _SPI1_WriteByte (1 -> -> 0 `i `uc ]
-"51
-[; ;main.c: 51:     _delay((unsigned long)((2)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"52
-[; ;main.c: 52:     SPI1_WriteByte(i);
-[e ( _SPI1_WriteByte (1 _i ]
-"53
-[; ;main.c: 53:     _delay((unsigned long)((5)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"54
-[; ;main.c: 54:     SPI1_Close();
-[e ( _SPI1_Close ..  ]
 "55
-[; ;main.c: 55:     _delay((unsigned long)((4)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 4 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+[; ;main.c: 55:     LATBbits.LATB0 = 0;
+[e = . . _LATBbits 0 0 -> -> 0 `i `uc ]
 "56
-[; ;main.c: 56:     LATBbits.LATB1 = 1;
-[e = . . _LATBbits 0 1 -> -> 1 `i `uc ]
+[; ;main.c: 56:     _delay((unsigned long)((5)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "57
-[; ;main.c: 57:     _delay((unsigned long)((700)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 700 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+[; ;main.c: 57:     SPI1_Open(SPI1_DEFAULT);
+[e ( _SPI1_Open (1 . `E6583 0 ]
 "58
-[; ;main.c: 58: }
-[e :UE 858 ]
-}
+[; ;main.c: 58:     SPI1_WriteByte(0x00);
+[e ( _SPI1_WriteByte (1 -> -> 0 `i `uc ]
+"59
+[; ;main.c: 59:     _delay((unsigned long)((2)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 2 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "60
-[; ;main.c: 60: uint8_t readloadcell(unsigned long sensitivity){
+[; ;main.c: 60:     SPI1_WriteByte(level);
+[e ( _SPI1_WriteByte (1 _level ]
+"61
+[; ;main.c: 61:     _delay((unsigned long)((5)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"62
+[; ;main.c: 62:     SPI1_Close();
+[e ( _SPI1_Close ..  ]
+"63
+[; ;main.c: 63:     _delay((unsigned long)((4)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 4 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"64
+[; ;main.c: 64:     LATBbits.LATB0 = 1;
+[e = . . _LATBbits 0 0 -> -> 1 `i `uc ]
+"65
+[; ;main.c: 65:     _delay((unsigned long)((700)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 700 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"66
+[; ;main.c: 66: }
+[e :UE 860 ]
+}
+"68
+[; ;main.c: 68: uint8_t readloadcell(unsigned long sensitivity){
 [v _readloadcell `(uc ~T0 @X0 1 ef1`ul ]
 {
 [e :U _readloadcell ]
 [v _sensitivity `ul ~T0 @X0 1 r1 ]
 [f ]
-"61
-[; ;main.c: 61: unsigned long data2 = 0;
+"69
+[; ;main.c: 69: unsigned long data2 = 0;
 [v _data2 `ul ~T0 @X0 1 a ]
 [e = _data2 -> -> -> 0 `i `l `ul ]
-"62
-[; ;main.c: 62: uint8_t data1 = 0;
+"70
+[; ;main.c: 70: uint8_t data1 = 0;
 [v _data1 `uc ~T0 @X0 1 a ]
 [e = _data1 -> -> 0 `i `uc ]
-"63
-[; ;main.c: 63:     for(int x = 0; x < 3; x++){
+"71
+[; ;main.c: 71:     for(int x = 0; x < 3; x++){
 {
 [v _x `i ~T0 @X0 1 a ]
 [e = _x -> 0 `i ]
-[e $ < _x -> 3 `i 860  ]
-[e $U 861  ]
-[e :U 860 ]
+[e $ < _x -> 3 `i 862  ]
+[e $U 863  ]
+[e :U 862 ]
 {
-"64
-[; ;main.c: 64:         for(int i = 0; i<8; i++){
+"72
+[; ;main.c: 72:         for(int i = 0; i < 8; i++){
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 863  ]
-[e $U 864  ]
-[e :U 863 ]
+[e $ < _i -> 8 `i 865  ]
+[e $U 866  ]
+[e :U 865 ]
 {
-"65
-[; ;main.c: 65:             LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"66
-[; ;main.c: 66:             _delay((unsigned long)((12)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 12 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"67
-[; ;main.c: 67:             if(PORTAbits.RA0){
-[e $ ! != -> . . _PORTAbits 0 0 `i -> 0 `i 866  ]
-{
-"68
-[; ;main.c: 68:                 data2 <<= 1;
-[e =<< _data2 -> -> 1 `i `ul ]
-"69
-[; ;main.c: 69:                 data2 |= 1;
-[e =| _data2 -> -> -> 1 `i `l `ul ]
-"70
-[; ;main.c: 70:             }
-}
-[e $U 867  ]
-"71
-[; ;main.c: 71:             else{
-[e :U 866 ]
-{
-"72
-[; ;main.c: 72:                 data2 <<= 1;
-[e =<< _data2 -> -> 1 `i `ul ]
 "73
-[; ;main.c: 73:             }
-}
-[e :U 867 ]
+[; ;main.c: 73:             LATAbits.LATA1 = 1;
+[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
 "74
-[; ;main.c: 74:             LATAbits.LATA1 = 0;
-[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+[; ;main.c: 74:             _delay((unsigned long)((12)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 12 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "75
-[; ;main.c: 75:             _delay((unsigned long)((6)*(8000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 6 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+[; ;main.c: 75:             if(PORTAbits.RA0){
+[e $ ! != -> . . _PORTAbits 0 0 `i -> 0 `i 868  ]
+{
 "76
-[; ;main.c: 76:         }
+[; ;main.c: 76:                 data2 <<= 1;
+[e =<< _data2 -> -> 1 `i `ul ]
+"77
+[; ;main.c: 77:                 data2 |= 1;
+[e =| _data2 -> -> -> 1 `i `l `ul ]
+"78
+[; ;main.c: 78:             }
+}
+[e $U 869  ]
+"79
+[; ;main.c: 79:             else{
+[e :U 868 ]
+{
+"80
+[; ;main.c: 80:                 data2 <<= 1;
+[e =<< _data2 -> -> 1 `i `ul ]
+"81
+[; ;main.c: 81:             }
+}
+[e :U 869 ]
+"82
+[; ;main.c: 82:             LATAbits.LATA1 = 0;
+[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
+"83
+[; ;main.c: 83:             _delay((unsigned long)((6)*(8000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 6 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"84
+[; ;main.c: 84:         }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 863  ]
-[e :U 864 ]
+[e $ < _i -> 8 `i 865  ]
+[e :U 866 ]
 }
-"77
-[; ;main.c: 77:     }
+"85
+[; ;main.c: 85:     }
 }
 [e ++ _x -> 1 `i ]
-[e $ < _x -> 3 `i 860  ]
-[e :U 861 ]
+[e $ < _x -> 3 `i 862  ]
+[e :U 863 ]
 }
-"78
-[; ;main.c: 78:     LATAbits.LATA1 = 1;
+"86
+[; ;main.c: 86:     LATAbits.LATA1 = 1;
 [e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"79
-[; ;main.c: 79:     _delay((unsigned long)((12)*(8000000/4000000.0)));
+"87
+[; ;main.c: 87:     _delay((unsigned long)((12)*(8000000/4000000.0)));
 [e ( __delay (1 -> * -> -> 12 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"80
-[; ;main.c: 80:     LATAbits.LATA1 = 0;
+"88
+[; ;main.c: 88:     LATAbits.LATA1 = 0;
 [e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
-"81
-[; ;main.c: 81:     data1 = data2 / sensitivity;
+"89
+[; ;main.c: 89:     data1 = data2 / sensitivity;
 [e = _data1 -> / _data2 _sensitivity `uc ]
-"82
-[; ;main.c: 82:     _delay((unsigned long)((1)*(8000000/4000.0)));
+"90
+[; ;main.c: 90:     _delay((unsigned long)((1)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"83
-[; ;main.c: 83:     return data1;
+"91
+[; ;main.c: 91:     if(data2 > 497316 && data1 < 254 ){
+[e $ ! && > _data2 -> -> 497316 `l `ul < -> _data1 `i -> 254 `i 870  ]
+{
+"92
+[; ;main.c: 92:         return 255;
+[e ) -> -> 255 `i `uc ]
+[e $UE 861  ]
+"93
+[; ;main.c: 93:     }else{
+}
+[e $U 871  ]
+[e :U 870 ]
+{
+"94
+[; ;main.c: 94:     return data1;}
 [e ) _data1 ]
-[e $UE 859  ]
-"84
-[; ;main.c: 84: }
-[e :UE 859 ]
+[e $UE 861  ]
+}
+[e :U 871 ]
+"95
+[; ;main.c: 95: }
+[e :UE 861 ]
 }

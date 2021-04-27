@@ -10852,13 +10852,7 @@ void OSCILLATOR_Initialize(void);
 
 uint8_t readloadcell(unsigned long sense);
 void writepot(uint8_t i);
-
-
-
-
-
-
-
+# 16 "main.c"
 void main(void)
 {
     uint8_t load = 0;
@@ -10868,20 +10862,26 @@ void main(void)
     SYSTEM_Initialize();
 
     _delay((unsigned long)((2000)*(8000000/4000.0)));
-    load = readloadcell(3000);
+    load = readloadcell(2000);
     load2 = load;
     _delay((unsigned long)((2000)*(8000000/4000.0)));
 
     while (1){
 
-        load = readloadcell(3000);
+        load = readloadcell(2000);
+
+        diff = abs(load - load2);
 
 
+        if(diff < 100 && load >= load2){
+        writepot(load);
+        load2 = load;
+        }
 
-
-            writepot(load);
-
-
+        if(load <= load2){
+        writepot(load);
+        load2 = load;
+        }
 
 
 
@@ -10891,17 +10891,17 @@ _delay((unsigned long)((50)*(8000000/4000.0)));
 }
 }
 
-void writepot(uint8_t i){
-    LATBbits.LATB1 = 0;
+void writepot(uint8_t level){
+    LATBbits.LATB0 = 0;
     _delay((unsigned long)((5)*(8000000/4000000.0)));
     SPI1_Open(SPI1_DEFAULT);
     SPI1_WriteByte(0x00);
     _delay((unsigned long)((2)*(8000000/4000000.0)));
-    SPI1_WriteByte(i);
+    SPI1_WriteByte(level);
     _delay((unsigned long)((5)*(8000000/4000000.0)));
     SPI1_Close();
     _delay((unsigned long)((4)*(8000000/4000000.0)));
-    LATBbits.LATB1 = 1;
+    LATBbits.LATB0 = 1;
     _delay((unsigned long)((700)*(8000000/4000000.0)));
 }
 
@@ -10909,7 +10909,7 @@ uint8_t readloadcell(unsigned long sensitivity){
 unsigned long data2 = 0;
 uint8_t data1 = 0;
     for(int x = 0; x < 3; x++){
-        for(int i = 0; i<8; i++){
+        for(int i = 0; i < 8; i++){
             LATAbits.LATA1 = 1;
             _delay((unsigned long)((12)*(8000000/4000000.0)));
             if(PORTAbits.RA0){
@@ -10928,5 +10928,8 @@ uint8_t data1 = 0;
     LATAbits.LATA1 = 0;
     data1 = data2 / sensitivity;
     _delay((unsigned long)((1)*(8000000/4000.0)));
-    return data1;
+    if(data2 > 497316 && data1 < 254 ){
+        return 255;
+    }else{
+    return data1;}
 }

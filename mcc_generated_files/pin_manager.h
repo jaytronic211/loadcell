@@ -65,19 +65,19 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
-// get/set channel_AN0 aliases
-#define channel_AN0_TRIS                 TRISAbits.TRISA0
-#define channel_AN0_LAT                  LATAbits.LATA0
-#define channel_AN0_PORT                 PORTAbits.RA0
-#define channel_AN0_ANS                  ANCON0bits.PCFG0
-#define channel_AN0_SetHigh()            do { LATAbits.LATA0 = 1; } while(0)
-#define channel_AN0_SetLow()             do { LATAbits.LATA0 = 0; } while(0)
-#define channel_AN0_Toggle()             do { LATAbits.LATA0 = ~LATAbits.LATA0; } while(0)
-#define channel_AN0_GetValue()           PORTAbits.RA0
-#define channel_AN0_SetDigitalInput()    do { TRISAbits.TRISA0 = 1; } while(0)
-#define channel_AN0_SetDigitalOutput()   do { TRISAbits.TRISA0 = 0; } while(0)
-#define channel_AN0_SetAnalogMode()      do { ANCON0bits.PCFG0 = 1; } while(0)
-#define channel_AN0_SetDigitalMode()     do { ANCON0bits.PCFG0 = 0; } while(0)
+// get/set LC_DAT aliases
+#define LC_DAT_TRIS                 TRISAbits.TRISA0
+#define LC_DAT_LAT                  LATAbits.LATA0
+#define LC_DAT_PORT                 PORTAbits.RA0
+#define LC_DAT_ANS                  ANCON0bits.PCFG0
+#define LC_DAT_SetHigh()            do { LATAbits.LATA0 = 1; } while(0)
+#define LC_DAT_SetLow()             do { LATAbits.LATA0 = 0; } while(0)
+#define LC_DAT_Toggle()             do { LATAbits.LATA0 = ~LATAbits.LATA0; } while(0)
+#define LC_DAT_GetValue()           PORTAbits.RA0
+#define LC_DAT_SetDigitalInput()    do { TRISAbits.TRISA0 = 1; } while(0)
+#define LC_DAT_SetDigitalOutput()   do { TRISAbits.TRISA0 = 0; } while(0)
+#define LC_DAT_SetAnalogMode()      do { ANCON0bits.PCFG0 = 1; } while(0)
+#define LC_DAT_SetDigitalMode()     do { ANCON0bits.PCFG0 = 0; } while(0)
 
 // get/set LC_CLK aliases
 #define LC_CLK_TRIS                 TRISAbits.TRISA1
